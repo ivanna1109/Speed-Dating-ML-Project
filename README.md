@@ -1,7 +1,7 @@
 # Speed-Dating-ML-Project
 
-Run app using the following command:
+Run app using the following command in CMD:
 
 python manage.py runserver 
 
-localhost:8000
+in Browser: localhost:8000/index
