@@ -1,0 +1,18 @@
+:root {
+    --basic-col: darkslategrey;
+    --blue-col: #0f52ba;
+    --baby-col: #55dcfa;
+    --red-col: #bd3a22;
+    --green-col: #0b6623;
+}
+
+body {
+	margin: 0;
+	padding: 0;
+	font-family: sans-serif;
+    background-color: #bd3a22;
+}
+
+.bg-color {
+	background-color: #ebdaca !important;
+}
