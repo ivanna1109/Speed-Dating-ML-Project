@@ -13,11 +13,21 @@ def extract_attributes(data):
                          'hiking', 'gaming', 'clubbing', 'reading', 'tv', 'theater',
                          'movies', 'concerts', 'music', 'shopping', 'yoga', 
                          'attr1_1', 'sinc1_1', 'intel1_1', 'fun1_1', 'amb1_1', 'shar1_1',
-                         'attr2_1', 'sinc2_1', 'intel2_1', 'fun2_1', 'amb2_1', 'shar2_1']]
-    
+                         'attr2_1', 'sinc2_1', 'intel2_1', 'fun2_1', 'amb2_1', 'shar2_1']]   
     data_reduced = data_reduced.fillna(method='ffill');
     data_reduced.loc[:,'income'] = data_reduced.loc[:,'income'].str.replace(",","").astype(float)
     return data_reduced
+
+def attributes_of_person(data_reduced):
+    data_for_db = data_reduced[['iid', 'gender', 'age', 'field',
+                         'field_cd', 'race', 'imprace', 'imprelig', 'career', 'career_c',
+                         'income', 'goal', 'date', 'go_out', 
+                         'sports', 'tvsports', 'exercise', 'dining', 'museums', 'art',
+                         'hiking', 'gaming', 'clubbing', 'reading', 'tv', 'theater',
+                         'movies', 'concerts', 'music', 'shopping', 'yoga', 
+                         'attr1_1', 'sinc1_1', 'intel1_1', 'fun1_1', 'amb1_1', 'shar1_1',
+                         'attr2_1', 'sinc2_1', 'intel2_1', 'fun2_1', 'amb2_1', 'shar2_1']].drop_duplicates()
+    return data_for_db;
 
 def attribute_corr(data):
     df_corr = data.corr().dropna()

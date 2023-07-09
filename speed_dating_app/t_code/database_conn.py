@@ -41,6 +41,14 @@ def get_all_persons():
     collection = connect_to_db()
     return list(collection.find())
 
+def find_person_by_ID(userID):
+    persons = connect_to_db()
+    query = {'userID': userID}
+    person = persons.find_one(query)
+    if (person == None):
+        return None
+    return person
+
 def get_all_users():
     collection = connect_to_db('mlRegisterUser')
     return collection.find()
@@ -60,13 +68,12 @@ def insert_persons(data_reduced):
     'theater':person['theater'], 'movies':person['movies'], 'concerts':person['concerts'], 'music':person['music'],
     'shopping':person['shopping'], 'yoga':person['yoga'], 'attr1_1':person['attr1_1'], 'sinc1_1':person['sinc1_1'],
     'intel1_1':person['intel1_1'], 'fun1_1':person['fun1_1'], 'amb1_1':person['amb1_1'], 'shar1_1':person['shar1_1'],
-    'dec': person['dec'],'pid':person['pid'],  'age_o':person['age_o'], 'race_o':person['race_o'], 'dec_o': person['dec_o'],
-    'int_corr':person['int_corr'], 'samerace':person['samerace'], 'attr_o':person['attr_o'], 
     'attr2_1':person['attr2_1'], 'sinc2_1':person['sinc2_1'], 'intel2_1':person['intel2_1'], 
-    'fun2_1':person['fun2_1'], 'amb2_1':person['amb2_1'], 'shar2_1':person['shar2_1'], 'match':person['match'],
+    'fun2_1':person['fun2_1'], 'amb2_1':person['amb2_1'], 'shar2_1':person['shar2_1'],
         }
         persons_list.append(person_doc)
     collection.insert_many(persons_list)
+
 """
 def update_type():
     collection = connect_to_db()
@@ -79,10 +86,13 @@ def update_type():
 
 update_type()
 
+
 def add_persons():
     data = dp.read_data()
     data_reduced = dp.extract_attributes(data)
-    insert_persons(data_reduced)
+    data_of_person = dp.attributes_of_person(data_reduced)
+    insert_persons(data_of_person)
+    print("Uspesno!")
 
 def update_race(idr, name):
     collection = connect_to_db()
@@ -96,7 +106,9 @@ def update_race(idr, name):
     print("Uspesno")
 
 #register_user(9000, 'ivanna', 'test')
-#add_persons() persons succesfully added to MongoDB
+#add_persons() #persons succesfully added to MongoDB
+update_race(6, 'Other')
+
 persons = list(get_all_persons())
 print(type(persons))
 persons = persons[:10]

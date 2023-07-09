@@ -23,8 +23,19 @@
         <div><a href="{% url 'login' %}">Log in</a></div>
         <div><a href="">Register</a></div>
     </div>
-    <div class="background">	
+    <div class="background"></div>
     <div class="body"> 
+        <h2 style="margin-top: 10px;"><b>Welcome to my profile!</b></h3>
+        {% if person.gender == 0 %}
+            <div class="image-profile-woman" style="height: 250px; width: 250px;"></div>
+        {% else %}
+            <div class="image-profile-man-details" style="height: 250px; width: 250px;"></div>
+        {% endif %}<br><br>
+        <h3><b><u>Summary</u></b></h3>
+        <h5><b>Age:</b> {{person.age}} years</h5>
+        <h5><b>Field of study: </b>{{person.field}}</h5>
+        <h5><b>Race: </b>{{person.race_str}}</h5>
+        
     </div>
 </div>	
 </body>

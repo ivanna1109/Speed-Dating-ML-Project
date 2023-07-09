@@ -18,17 +18,19 @@
     
     <div class="nav">  
         <div class="image-nav"></div>
+        
         <div class="title-nav">Speed Dating</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
         <div><a href="{% url 'login' %}">Log in</a></div>
         <div><a href="">Register</a></div>
     </div>
-    <div class="background"></div>		
+    <div class="background">      </div>
       <div class="body"> 
+        {% if persons != null %}
         {% for person in persons %}
         <div class="card">
           <div class="card-content">
-              {% if person.gender == '0' %}
+              {% if person.gender == 0 %}
                 <div class="image-profile-woman"></div>
               {% else %}
                 <div class="image-profile-man"></div>
@@ -40,10 +42,11 @@
               {% if person.carer != null %}
                 <h5>Career ambitions: {{person.carer}}</h5>
               {% endif %}
-              <a href="{% url 'person_details' %}" class="card-button">Details...</a>
+              <a href="{% url 'person_details' parametar=person.userID %}" class="card-button">Details...</a>
           </div>
         </div>    
-        {% endfor %}    
-      </div>
+        {% endfor %}  
+        {% endif %}
+    </div>	
   </body>
 </html>
