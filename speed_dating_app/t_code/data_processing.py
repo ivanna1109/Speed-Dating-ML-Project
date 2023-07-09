@@ -1,5 +1,4 @@
 import pandas as pd
-
 def read_data():
     data = pd.read_csv('Speed Dating Data.csv', encoding="ISO 8859-1")
     return data
@@ -8,8 +7,8 @@ def read_data():
 def extract_attributes(data):
     data_reduced = data[['iid', 'gender', 'pid', 'match', 'int_corr', 'samerace',
                          'age_o', 'race_o', 'dec_o', 'dec', 'attr_o', 'age',
-                         'field_cd', 'race', 'imprace', 'imprelig',
-                         'income', 'goal', 'date', 'go_out',  'career_c',
+                         'field', 'field_cd', 'race', 'imprace', 'imprelig',
+                         'income', 'goal', 'date', 'go_out', 'career', 'career_c',
                          'sports', 'tvsports', 'exercise', 'dining', 'museums', 'art',
                          'hiking', 'gaming', 'clubbing', 'reading', 'tv', 'theater',
                          'movies', 'concerts', 'music', 'shopping', 'yoga', 
@@ -28,5 +27,6 @@ def attribute_corr(data):
     return data_subset
 
 
-read_data()
-
+data = read_data()
+data_reduced = extract_attributes(data)
+print(data_reduced.shape)

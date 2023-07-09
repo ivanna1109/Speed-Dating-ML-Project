@@ -23,27 +23,9 @@
         <div><a href="{% url 'login' %}">Log in</a></div>
         <div><a href="">Register</a></div>
     </div>
-    <div class="background"></div>		
-      <div class="body"> 
-        {% for person in persons %}
-        <div class="card">
-          <div class="card-content">
-              {% if person.gender == '0' %}
-                <div class="image-profile-woman"></div>
-              {% else %}
-                <div class="image-profile-man"></div>
-              {% endif %}
-              <h3>Person ID: {{person.userID}}</h3>
-              <h5>Age: {{person.age}} years</h5>
-              <h5>Race: {{person.race_str}}</h5>
-              <h5>Field of study: {{person.field}}</h5>
-              {% if person.carer != null %}
-                <h5>Career ambitions: {{person.carer}}</h5>
-              {% endif %}
-              <a href="{% url 'person_details' %}" class="card-button">Details...</a>
-          </div>
-        </div>    
-        {% endfor %}    
-      </div>
-  </body>
+    <div class="background">	
+    <div class="body"> 
+    </div>
+</div>	
+</body>
 </html>

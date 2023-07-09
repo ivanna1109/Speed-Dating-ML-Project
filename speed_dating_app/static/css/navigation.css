@@ -3,14 +3,14 @@
 	height: 70px;
 	background-color: var(--blue-col);
 	display: flex;
-	justify-content: space-around;
+	justify-content:baseline;
 	align-items: center;
 	
 	-webkit-box-shadow: 0px 0px 21px 5px rgba(0,0,0,0.51); 
 	box-shadow: 0px 0px 21px 5px rgba(0,0,0,0.51);
 	
 	z-index: 10;
-	position: fixed;
+	position:fixed;
 }
 
 .title-nav {
@@ -20,7 +20,7 @@
 	text-transform: uppercase;
 	font-weight: 1000;
 	font-size: larger;
-	margin-right: 600px;
+	margin-right: 800px;
   }
 
 .nav_drop a, .nav a:link, .nav a:active, .nav a:visited, .nav a:hover {
@@ -104,11 +104,11 @@
 
 .body h2 {
 	margin-top: 60px;
-	color: var(--red-col);
+	color: var(--blue-col);
 }
 
 .body h1 {
-	color: var(--red-col);
+	color: var(--blue-col);
 	font-weight: 900;
 }
 
