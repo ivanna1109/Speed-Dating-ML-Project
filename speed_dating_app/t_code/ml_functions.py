@@ -5,6 +5,8 @@ import numpy as np
 # Finding instances that are the most resembling to the instance passed by the parameter
 def most_resembling(instance):
     data = dp.read_data()
+    scale_evaluation_columns(data)
+    data = data.fillna(method='ffill');
     data_reduced = dp.extract_attributes(data)
     # We decide to choose 3 of the most similiar profiles with at least 1 match
     data_reduced = data_reduced[data_reduced['match'] == 1]
@@ -33,26 +35,56 @@ def most_resembling(instance):
     list_of_all_matches = data_transform(list_of_all_matches)
         
     # calculating the 'match percentage' value in order to find the best ones
-    #data_potential_matches_tmp['match_pct'] = find_match_pct_list(data_potential_matches_tmp, list_of_all_matches)
+    list = find_match_pct_list(data_potential_matches_tmp, list_of_all_matches)
+    data_potential_matches_tmp.insert(data_potential_matches_tmp.shape[1], 'match_value', list, True)
+    data_matches = data_potential_matches_tmp.sort_values(['iid', 'match_value'], ascending=True)
+    print(data_matches.head(3))
 
-    print(list_of_all_matches)
-    
+    # the final list containing the 'iid' values for top 3 matches
+    top_3_matches = [int(data_matches.iloc[0]['pid']), int(data_matches.iloc[1]['pid']), int(data_matches.iloc[2]['pid'])]
+    print(top_3_matches)
+    return top_3_matches
+
 # finding a list that contains euclidean distances between all of the instances and their matches
 def find_match_pct_list(data_potential_matches_tmp, list_of_all_matches):
     match_pct_list = []
     for index, row in data_potential_matches_tmp.iterrows():
-        similar_people_vector = find_similar_people_vector(row)
-        match_vector = find_similar_people_match_vector(list_of_all_matches[list_of_all_matches['iid'] == row['pid']])
+        similar_people_vector = find_similar_people_vector1(row)
+        match_df = list_of_all_matches[list_of_all_matches['iid'] == row['pid']]
+        match_vector = find_similar_people_vector2(match_df.iloc[0])
         match_pct_list.append(euclidean(similar_people_vector, match_vector))
     return match_pct_list
 
 # extracting the attributes representing someone's expectations
-def find_similar_people_vector(similar_people):
-    pass
+def find_similar_people_vector1(similar_people):
+    vector = [similar_people['age'], similar_people['imprace'], similar_people['imprelig'],
+              similar_people['goal'], similar_people['go_out'],
+              similar_people['sports'], similar_people['tvsports'], similar_people['exercise'],
+              similar_people['dining'], similar_people['museums'], similar_people['art'],
+              similar_people['hiking'], similar_people['gaming'], similar_people['clubbing'], 
+              similar_people['reading'], similar_people['tv'], similar_people['theater'],
+              similar_people['movies'], similar_people['concerts'], similar_people['music'], 
+              similar_people['shopping'], similar_people['yoga'], similar_people['attr1_1'], 
+              similar_people['sinc1_1'], similar_people['intel1_1'], similar_people['fun1_1'], 
+              similar_people['amb1_1'], similar_people['attr3_1'], 
+              similar_people['sinc3_1'], similar_people['intel3_1'], similar_people['fun3_1'], 
+              similar_people['amb3_1']]
+    return vector
 
-# extracting the attributes representing the needed characterstics of a match
-def find_similar_people_match_vector(match):
-    pass
+def find_similar_people_vector2(similar_people):
+    vector = [similar_people['age'], similar_people['imprace'], similar_people['imprelig'],
+              similar_people['goal'], similar_people['go_out'],
+              similar_people['sports'], similar_people['tvsports'], similar_people['exercise'],
+              similar_people['dining'], similar_people['museums'], similar_people['art'],
+              similar_people['hiking'], similar_people['gaming'], similar_people['clubbing'], 
+              similar_people['reading'], similar_people['tv'], similar_people['theater'],
+              similar_people['movies'], similar_people['concerts'], similar_people['music'], 
+              similar_people['shopping'], similar_people['yoga'], similar_people['attr3_1'], 
+              similar_people['sinc3_1'], similar_people['intel3_1'], similar_people['fun3_1'], 
+              similar_people['amb3_1'], similar_people['attr1_1'], 
+              similar_people['sinc1_1'], similar_people['intel1_1'], similar_people['fun1_1'], 
+              similar_people['amb1_1']]
+    return vector
 
 def data_transform(data_frame):
     return data_frame[['iid', 'gender', 'age',
@@ -62,9 +94,20 @@ def data_transform(data_frame):
                          'hiking', 'gaming', 'clubbing', 'reading', 'tv', 'theater',
                          'movies', 'concerts', 'music', 'shopping', 'yoga', 
                          'attr1_1', 'sinc1_1', 'intel1_1', 'fun1_1', 'amb1_1', 'shar1_1',
-                         'attr2_1', 'sinc2_1', 'intel2_1', 'fun2_1', 'amb2_1', 'shar2_1']].drop_duplicates()
+                         'attr3_1', 'sinc3_1', 'intel3_1', 'fun3_1', 'amb3_1']].drop_duplicates()
 
 
+# scaling attr1_1, ..., shar1_1 attributes to a [1-10] interval
+def attribute_scaling(x):
+    return 1 + (x / 100) * 9
+
+def scale_evaluation_columns(data_frame):
+    data_frame['attr1_1'] = data_frame['attr1_1'].map(attribute_scaling)
+    data_frame['sinc1_1'] = data_frame['sinc1_1'].map(attribute_scaling)
+    data_frame['intel1_1'] = data_frame['intel1_1'].map(attribute_scaling)
+    data_frame['fun1_1'] = data_frame['fun1_1'].map(attribute_scaling)
+    data_frame['amb1_1'] = data_frame['amb1_1'].map(attribute_scaling)
+ 
 def find_closest_instance(df, instance):
     distances = df.apply(lambda row: euclidean(row, instance), axis=1)
     top_tree = distances.sort_values()[:3]
