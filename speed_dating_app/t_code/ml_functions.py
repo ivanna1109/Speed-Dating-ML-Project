@@ -3,7 +3,7 @@ from scipy.spatial.distance import euclidean
 import numpy as np
 
 # Finding instances that are the most resembling to the instance passed by the parameter
-def most_resembling(instance):
+def most_resembling(instance_attrs):
     data = dp.read_data()
     scale_evaluation_columns(data)
     data = data.fillna(method='ffill');
@@ -14,7 +14,10 @@ def most_resembling(instance):
     data_reduced_resembling = data_transform(data_reduced)
     data1 = data_reduced_resembling
 
-    closest_instances = find_closest_instance(data_reduced_resembling, data1.iloc[0])
+    # creating an instance based on the attributes passed by the parameter 'instance_attrs'
+    new_instance = create_instance(instance_attrs, data.shape[0] + 1)
+
+    closest_instances = find_closest_instance(data_reduced_resembling, new_instance)
     max_row_ind = closest_instances.idxmax()
     middle_row_ind = closest_instances[:2].idxmax()
     min_row_ind = closest_instances.idxmin()
@@ -114,5 +117,11 @@ def find_closest_instance(df, instance):
     print(top_tree)
     return top_tree
 
-most_resembling(None)
+def create_instance(instance_attributes, iid):
+    instance = [iid] + instance_attributes
+    return instance
+
+
+most_resembling([0.0, 43.0, 1.0, 4.0, 2.0, 4.0, 85000.0, 2.0, 7.0, 1.0, 9.0, 2.0, 8.0, 9.0, 8.0, 8.0, 5.0, 9.0, 5.0, 6.0, 9.0, 1.0, 10.0, 10.0, 9.0, 8.0, 1.0,
+                 2.35, 2.80, 2.80, 2.35, 2.35, 15.0, 1.0, 2.0, 1.0, 1.0, 2.0])
 
