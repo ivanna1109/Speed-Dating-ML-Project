@@ -26,8 +26,8 @@
     </div>
     <div class="background">      </div>
       <div class="body"> 
-        {% if persons != null %}
-        {% for person in persons %}
+        {% if page_obj != null %}
+        {% for person in page_obj %}
         <div class="card">
           <div class="card-content">
               {% if person.gender == 0 %}
@@ -47,6 +47,21 @@
         </div>    
         {% endfor %}  
         {% endif %}
+        <div class="pagination">
+          <span class="step-links">
+              {% if page_obj.has_previous %}
+                  <a href="?page=1">&laquo; Prva</a>
+                  <a href="?page={{ page_obj.previous_page_number }}">Prethodna</a>
+              {% endif %}
+      
+              <span class="current-page">{{ page_obj.number }}</span>
+      
+              {% if page_obj.has_next %}
+                  <a href="?page={{ page_obj.next_page_number }}">Sledeća</a>
+                  <a href="?page={{ page_obj.paginator.num_pages }}">Poslednja &raquo;</a>
+              {% endif %}
+          </span>
+      </div>
     </div>	
   </body>
 </html>

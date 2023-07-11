@@ -1,4 +1,5 @@
 from pymongo import MongoClient
+import random
 #import data_processing as dp
 
 # Konekcija na MongoDB
@@ -39,7 +40,10 @@ def register_user(userID, username, password):
 
 def get_all_persons():
     collection = connect_to_db()
-    return list(collection.find())
+    persons = list(collection.find())
+    #random.shuffle(persons)
+
+    return persons
 
 def find_person_by_ID(userID):
     persons = connect_to_db()
@@ -68,24 +72,24 @@ def insert_persons(data_reduced):
     'theater':person['theater'], 'movies':person['movies'], 'concerts':person['concerts'], 'music':person['music'],
     'shopping':person['shopping'], 'yoga':person['yoga'], 'attr1_1':person['attr1_1'], 'sinc1_1':person['sinc1_1'],
     'intel1_1':person['intel1_1'], 'fun1_1':person['fun1_1'], 'amb1_1':person['amb1_1'], 'shar1_1':person['shar1_1'],
-    'attr2_1':person['attr2_1'], 'sinc2_1':person['sinc2_1'], 'intel2_1':person['intel2_1'], 
-    'fun2_1':person['fun2_1'], 'amb2_1':person['amb2_1'], 'shar2_1':person['shar2_1'],
+    'attr3_1':person['attr3_1'], 'sinc3_1':person['sinc3_1'], 'intel3_1':person['intel3_1'], 
+    'fun3_1':person['fun3_1'], 'amb3_1':person['amb3_1']
         }
         persons_list.append(person_doc)
     collection.insert_many(persons_list)
 
-"""
+
 def update_type():
     collection = connect_to_db()
     persons = collection.find()
     for document in persons:
-        current_value = document['career_c']
+        current_value = document['amb3_1']
         new_value = int(current_value)  # Konvertujemo trenutnu vrijednost u int
-        collection.update_one({'_id': document['_id']}, {'$set': {'career_c': new_value}})
+        collection.update_one({'_id': document['_id']}, {'$set': {'amb3_1': new_value}})
     print('uspesno')
 
+"""
 update_type()
-
 
 def add_persons():
     data = dp.read_data()
@@ -107,10 +111,5 @@ def update_race(idr, name):
 
 #register_user(9000, 'ivanna', 'test')
 #add_persons() #persons succesfully added to MongoDB
-update_race(6, 'Other')
-
-persons = list(get_all_persons())
-print(type(persons))
-persons = persons[:10]
-print(len(persons))
+#update_race(6, 'Other')
 """

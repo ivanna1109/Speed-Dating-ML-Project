@@ -1,0 +1,39 @@
+table {
+  width: 100%
+}
+
+td {
+  justify-content: left;
+  padding-right: 10px;
+  height: 40px;
+}
+
+.td-2{
+  justify-content: right;
+  width: 50px;
+}
+.interest {
+    display: flex;
+    margin-bottom: 10px;
+    align-items: center;
+  }
+  
+  .label-interest {
+    margin-right: 5px;
+    font-size: medium;
+    font-weight: bold;
+  }
+  
+  .progress-bar {
+    width: 200px;
+    height: 20px;
+    background-color: #e0e0e0;
+    border: 1px solid #2620a9;
+    border-radius: 10px;
+  }
+  
+  .progress {
+    height: 100%;
+    background-color: #2620a9;
+  }
+  

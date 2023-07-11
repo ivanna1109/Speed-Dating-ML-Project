@@ -2,13 +2,15 @@ from django.shortcuts import render
 from django.template import loader
 from django.http import HttpResponse
 from django.urls import reverse
-import random
+from django.core.paginator import Paginator
 from .t_code import database_conn as db
 
 def index_page(request):
-    persons = db.get_all_persons()[:20]
-    random.shuffle(persons)
-    context = {'persons': persons}
+    persons = db.get_all_persons()
+    paginator = Paginator(persons, 5)  # Podeli objekte na stranice sa po 10 elemenata
+    page_number = request.GET.get('page')  # Preuzmi broj trenutne stranice iz zahteva
+    page_obj = paginator.get_page(page_number) 
+    context = {'page_obj': page_obj}
     return render(request, 'index.html', context)
 
 def login(request):

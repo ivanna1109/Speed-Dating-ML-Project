@@ -6,10 +6,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Speed Dating</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
     <link rel="stylesheet" type="text/css" href="{% static 'css/myCSS.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/index.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/background.css' %}">
     <link rel="stylesheet" type="text/css" href="{% static 'css/navigation.css' %}">
+    <link rel="stylesheet" type="text/css" href="{% static 'css/personDetails.css' %}">
 </head>
   <body>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -34,9 +36,152 @@
         <h3><b><u>Summary</u></b></h3>
         <h5><b>Age:</b> {{person.age}} years</h5>
         <h5><b>Field of study: </b>{{person.field}}</h5>
-        <h5><b>Race: </b>{{person.race_str}}</h5>
-        
+        <h5><b>Race: </b>{{person.race_str}}</h5><br><br>
+        <h4 style="margin-top: 10px;"><b><u>Interests (on scale 1-10)</u></b></h4>
+            <table style="margin-top: -150px;">
+                <tr>            
+                    <div class="interest">
+                        <td> <div class="label-interest">Sports</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.sports }}0%;"></div></td>
+                    </div>          
+                    <div class="interest">
+                        <td> <div class="label-interest">TV sports</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.tvsports }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Exercise</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.exercise }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Dining</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.dining }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Museums</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.museums }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Art</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.art }}0%;"></div> </td>             
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Hiking</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.hiking }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Gaming</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.gaming }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                    <td><div class="label-interest">Clubbing</div></td>
+                    <td> <div class="progress-bar">
+                        <div class="progress" style="width: {{ person.clubbing }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Reading</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.reading }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Wathing TV</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.tv }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Theater</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.theater }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Movies</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.movies }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Concerts</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.concerts }}0%;"></div></td>
+                    </div>
+                </tr>
+                <tr>
+                    <div class="interest">
+                        <td><div class="label-interest">Shopping</div></td>
+                        <td> <div class="progress-bar">
+                        <div class="progress" style="width: {{ person.shopping }}0%;"></div></td>
+                    </div>
+                    <div class="interest">
+                        <td><div class="label-interest">Yoga</div></td>
+                        <td><div class="progress-bar">
+                        <div class="progress" style="width: {{ person.yoga }}0%;"></div></td>
+                    </div>
+                    </div>
+                </tr>
+            </table>  
+        <h4 style="margin-top: 10px;"><b><u>How would I rate myself? (on scale 1-10)</u></b></h4>
+            <table style="margin-right: 200px; width: 500px;">
+                <div class="w3-container">
+                <tr>
+                    <td class="label-interest">Attractive</td>
+                    <td>
+                        <div class="w3-light-grey" style="border: 2px solid green;">
+                            <div class="w3-green" style="height:24px;width: {{person.attr3_1}}0%">{{person.attr3_1}}/10</div>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-interest">Intelligence</td>
+                    <td>
+                        <div class="w3-light-grey" style="border: 2px solid red;">
+                            <div class="w3-red" style="height:24px;width:{{person.intel3_1}}0%">{{person.intel3_1}}/10</div>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-interest">Sincere</td>
+                    <td>
+                        <div class="w3-light-grey" style="border: 2px solid blue;">
+                            <div class="w3-blue" style="height:24px;width:{{person.sinc3_1}}0%">{{person.sinc3_1}}/10</div>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-interest">Fun</td>
+                    <td>
+                        <div class="w3-light-grey" style="border: 2px solid red;">
+                            <div class="w3-red" style="height:24px;width:{{person.fun3_1}}0%">{{person.fun3_1}}/10</div>
+                          </div>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="label-interest">Ambitious</td>
+                    <td>
+                        <div class="w3-light-grey" style="border: 2px solid green;">
+                            <div class="w3-green" style="height:24px;width:{{person.amb3_1}}0%">{{person.amb3_1}}/10</div>
+                          </div>
+                    </td>
+                </tr>
+            </div>   
+            </table>
     </div>
-</div>	
 </body>
 </html>
