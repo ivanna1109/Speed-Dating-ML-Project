@@ -26,7 +26,9 @@ SECRET_KEY = 'django-insecure-@$v3$gnla(ivl-j2^4*cmf3zj8at8(g#3$i0rx*hq70y-v)n^j
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+#ALLOWED_HOSTS = ['localhost', '127.0.0.1']
+
+LOGIN_URL = '/login/'
 
 
 # Application definition
@@ -45,11 +47,15 @@ MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+   # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.db'
+SESSION_COOKIE_SECURE = False
+SESSION_COOKIE_HTTPONLY = True
 
 ROOT_URLCONF = 'speed_dating.urls'
 

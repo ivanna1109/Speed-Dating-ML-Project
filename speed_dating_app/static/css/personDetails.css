@@ -8,6 +8,23 @@ td {
   height: 40px;
 }
 
+.table2 {
+  width: 800px;
+  border: 2px solid blue;
+}
+
+.tr2 {
+  border: 1px solid blue;
+}
+
+
+hr {
+    height:5px;
+    border-width:0;
+    background-color:#00A4BD;
+}
+
+
 .td-2{
   justify-content: right;
   width: 50px;

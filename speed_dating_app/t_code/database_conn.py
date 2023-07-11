@@ -12,12 +12,12 @@ def connect_to_db(col_name = 'mlPersonData'):
         collection = db['mlRegisterUser']
     return collection
 
-def log_in(username, password):
+def check_user(username, password):
     collection = connect_to_db('mlRegisterUser')
     query = {"username": username, 'password': password}
     user = collection.find_one(query)
     if (user == None):
-        return 0
+        return -1
     return user['userID']
 
 #in the system cant be 2 users with the same username

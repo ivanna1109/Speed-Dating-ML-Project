@@ -17,13 +17,16 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.min.js" integrity="sha384-cuYeSxntonz0PPNlHhBs68uyIAVpIIOZZ5JqeqvYYIcEL727kskC66kF92t6Xl2V" crossorigin="anonymous"></script>
-    
     <div class="nav">  
-        <div class="image-nav"></div>
-        <div class="title-nav">Speed Dating</div>
+        <div class="image-nav"></div>     
+        <div class="title-nav" style="margin-right: 600px;">Welcome to Speed Dating website!</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
+        {% if request.session.user %}
+          <div><a href="{% url 'login' %}">Top 3 matches</a></div>
+          <div><a href="{% url 'log_out'%}">Log out</a></div>
+        {% else %}
         <div><a href="{% url 'login' %}">Log in</a></div>
-        <div><a href="">Register</a></div>
+        {% endif %}
     </div>
     <div class="background"></div>
     <div class="body"> 
@@ -37,7 +40,7 @@
         <h5><b>Age:</b> {{person.age}} years</h5>
         <h5><b>Field of study: </b>{{person.field}}</h5>
         <h5><b>Race: </b>{{person.race_str}}</h5><br><br>
-        <h4 style="margin-top: 10px;"><b><u>Interests (on scale 1-10)</u></b></h4>
+        <h3 style="margin-top: 10px;"><b><u>Interests (on scale 1-10)</u></b></h3>
             <table style="margin-top: -150px;">
                 <tr>            
                     <div class="interest">
@@ -136,15 +139,29 @@
                     </div>
                     </div>
                 </tr>
-            </table>  
-        <h4 style="margin-top: 10px;"><b><u>How would I rate myself? (on scale 1-10)</u></b></h4>
-            <table style="margin-right: 200px; width: 500px;">
+            </table> 
+            <hr><br>   
+            <table style="width: 700px; margin-right: 50px;">
+                <tr>
+                    <th><h4><b>Trait</b></h4></th>
+                    <th>
+                        <h4><b>How would <br>I rate myself?</b></h4>
+                    </th>
+                    <th>
+                        <h4><b>Here are five <br> needed words</b></h4>
+                    </th>
+                </tr>
                 <div class="w3-container">
                 <tr>
-                    <td class="label-interest">Attractive</td>
-                    <td>
+                    <td class="label-interest">Attractive: </td>
+                    <td >
                         <div class="w3-light-grey" style="border: 2px solid green;">
                             <div class="w3-green" style="height:24px;width: {{person.attr3_1}}0%">{{person.attr3_1}}/10</div>
+                          </div>
+                    </td>
+                    <td class="label-interest">
+                        <div class="w3-light-grey" style="border: 2px solid green;">
+                            <div class="w3-green" style="height:24px;width: {{person.attr1_1}}0%;">{{person.attr1_1}}/100</div>
                           </div>
                     </td>
                 </tr>
@@ -155,12 +172,22 @@
                             <div class="w3-red" style="height:24px;width:{{person.intel3_1}}0%">{{person.intel3_1}}/10</div>
                           </div>
                     </td>
+                    <td class="label-interest">
+                        <div class="w3-light-grey" style="border: 2px solid red;">
+                            <div class="w3-red" style="height:24px;width: {{person.intel1_1}}0%">{{person.intel1_1}}/100</div>
+                          </div>
+                    </td>
                 </tr>
                 <tr>
                     <td class="label-interest">Sincere</td>
                     <td>
                         <div class="w3-light-grey" style="border: 2px solid blue;">
                             <div class="w3-blue" style="height:24px;width:{{person.sinc3_1}}0%">{{person.sinc3_1}}/10</div>
+                          </div>
+                    </td>
+                    <td class="label-interest">
+                        <div class="w3-light-grey" style="border: 2px solid blue;">
+                            <div class="w3-blue" style="height:24px;width: {{person.sinc1_1}}0%">{{person.sinc1_1}}/100</div>
                           </div>
                     </td>
                 </tr>
@@ -171,12 +198,22 @@
                             <div class="w3-red" style="height:24px;width:{{person.fun3_1}}0%">{{person.fun3_1}}/10</div>
                           </div>
                     </td>
+                    <td class="label-interest">
+                        <div class="w3-light-grey" style="border: 2px solid red;">
+                            <div class="w3-red" style="height:24px;width: {{person.fun1_1}}0%">{{person.fun1_1}}/100</div>
+                          </div> 
+                    </td>
                 </tr>
                 <tr>
                     <td class="label-interest">Ambitious</td>
                     <td>
                         <div class="w3-light-grey" style="border: 2px solid green;">
                             <div class="w3-green" style="height:24px;width:{{person.amb3_1}}0%">{{person.amb3_1}}/10</div>
+                          </div>
+                    </td>
+                    <td class="label-interest">
+                        <div class="w3-light-grey" style="border: 2px solid green;">
+                            <div class="w3-green" style="height:24px;width: {{person.amb1_1}}0%">{{person.amb1_1}}/100</div>
                           </div>
                     </td>
                 </tr>

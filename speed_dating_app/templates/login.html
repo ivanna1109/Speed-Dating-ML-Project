@@ -13,26 +13,34 @@
 </head>
 <body>
     <div class="nav">  
-        <div class="image-nav"></div>
-        <div class="title-nav">Speed Dating</div>
+        <div class="image-nav"></div>     
+        <div class="title-nav" style="margin-right: 600px;">Welcome to Speed Dating website!</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
-        <div><a href="{% url 'login' %}">Login</a></div>
-        <div><a href="">Register</a></div>
+        {% if request.session.user %}
+          <div><a href="{% url 'login' %}">Top 3 matches</a></div>
+          <div><a href="{% url 'log_out'%}">Log out</a></div>
+        {% else %}
+        <div><a href="{% url 'login' %}">Log in</a></div>
+        {% endif %}
     </div>
     <div class="background"></div>		
     <div class="body"> 
         <div class="page">
             <div class="box bg-color-login">
-                <h2 class="h2-login">Log in</h2><br>
-                <form action="">
+                <h2 class="h2-login">Log in</h2><br><br><br>
+                <form action="{% url 'submit_login' %}" method="POST">
+                    {% csrf_token %}
                     <label class="lbl-blue">Username</label><br><br>
-                    <input type="text" name="username" class="input-f-blue" placeholder="korisnickoIme" pattern="[A-Za-z\d]+" required> <br><br>
+                    <input type="text" name="username" class="input-f-blue" placeholder="username" pattern="[A-Za-z\d]+" required> <br><br>
                     <label class="lbl-blue">Password</label><br><br>
                     <input type="password" name="password" class="input-f-blue" placeholder="*********" required> <br><br>
                     <button class="btn-blue-out" type="submit">Submit</button><br><br>
                 </form>
-    </div>
-</div>
+            </div>
+        </div>
+        {% if message != null %}
+        <h5 style="color:blue">{{message}}</h5>
+        {% endif %}
 </div>
 </body>
 </html>
