@@ -17,7 +17,7 @@
         <div class="title-nav" style="margin-right: 600px;">Welcome to Speed Dating website!</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
         {% if request.session.user %}
-          <div><a href="{% url 'login' %}">Top 3 matches</a></div>
+          <div><a href="{% url 'top_matches' %}">Top 3 matches</a></div>
           <div><a href="{% url 'log_out'%}">Log out</a></div>
         {% else %}
         <div><a href="{% url 'login' %}">Log in</a></div>

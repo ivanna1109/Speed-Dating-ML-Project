@@ -22,7 +22,7 @@
         <div class="title-nav" style="margin-right: 600px;">Welcome to Speed Dating website!</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
         {% if request.session.user %}
-          <div><a href="{% url 'login' %}">Top 3 matches</a></div>
+          <div><a href="{% url 'top_matches' %}">Top 3 matches</a></div>
           <div><a href="{% url 'log_out'%}">Log out</a></div>
         {% else %}
         <div><a href="{% url 'login' %}">Log in</a></div>
@@ -148,7 +148,7 @@
                         <h4><b>How would <br>I rate myself?</b></h4>
                     </th>
                     <th>
-                        <h4><b>Here are five <br> needed words</b></h4>
+                        <h4><b>Importance of <br>my  partner's traits</b></h4>
                     </th>
                 </tr>
                 <div class="w3-container">

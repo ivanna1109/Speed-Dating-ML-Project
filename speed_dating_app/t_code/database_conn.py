@@ -53,6 +53,15 @@ def find_person_by_ID(userID):
         return None
     return person
 
+def find_top_matches(list):
+    top_matches = []
+    persons = connect_to_db()
+    for iid in list:
+        query = {'iid': iid}
+        person = persons.find_one(query)
+        top_matches.append(person)
+    return top_matches
+
 def get_all_users():
     collection = connect_to_db('mlRegisterUser')
     return collection.find()
@@ -108,8 +117,7 @@ def update_race(idr, name):
     # Ažuriranje dokumenata koji zadovoljavaju upit
     result = collection.update_many(filter, update)
     print("Uspesno")
-
-#register_user(9000, 'ivanna', 'test')
+"""
+#register_user(8356, 'person8356', '12345')
 #add_persons() #persons succesfully added to MongoDB
 #update_race(6, 'Other')
-"""
