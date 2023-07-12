@@ -22,8 +22,9 @@
         <div class="title-nav" style="margin-right: 600px;">Welcome to Speed Dating website!</div>
         <div><a href="{% url 'index_page' %}">Home</a></div> 
         {% if request.session.user %}
-          <div><a href="{% url 'top_matches' %}">Top 3 matches</a></div>
-          <div><a href="{% url 'log_out'%}">Log out</a></div>
+            <div><a href="{% url 'top_matches' %}">Top 3 matches</a></div>
+            <div><a href="{% url 'my_profile' %}">My profile</a></div>
+            <div><a href="{% url 'log_out'%}">Log out</a></div>
         {% else %}
         <div><a href="{% url 'login' %}">Log in</a></div>
         {% endif %}
@@ -34,7 +35,7 @@
         {% if person.gender == 0 %}
             <div class="image-profile-woman" style="height: 250px; width: 250px;"></div>
         {% else %}
-            <div class="image-profile-man-details" style="height: 250px; width: 250px;"></div>
+            <div class="image-profile-man" style="height: 250px; width: 250px;"></div>
         {% endif %}<br><br>
         <h3><b><u>Summary</u></b></h3>
         <h5><b>Age:</b> {{person.age}} years</h5>

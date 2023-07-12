@@ -52,6 +52,11 @@ def person_details(request, parametar):
     context = {'person': chosen_person}
     return render(request, 'person_details.html', context)
 
+def my_profile(request):
+    profile = db.find_person_by_ID(int(request.session['user']))
+    context = {'person': profile}
+    return render(request, 'person_details.html', context)
+
 def top_matches(request):
     userId = request.session['user']
     user_doc = db.find_person_by_ID(userId)

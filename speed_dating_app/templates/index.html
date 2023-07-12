@@ -21,6 +21,7 @@
         <div><a href="{% url 'index_page' %}">Home</a></div> 
         {% if request.session.user %}
           <div><a href="{% url 'top_matches' %}">Top 3 matches</a></div>
+          <div><a href="{% url 'my_profile' %}">My profile</a></div>
           <div><a href="{% url 'log_out'%}">Log out</a></div>
         {% else %}
         <div><a href="{% url 'login' %}">Log in</a></div>
@@ -28,6 +29,7 @@
     </div>
     <div class="background"></div>
       <div class="body"> 
+        <h2 style="margin-top: -10px"><b>Let's find your soulmate!</b></h2>
         {% if page_obj != null %}
         {% for person in page_obj %}
         <div class="card">
